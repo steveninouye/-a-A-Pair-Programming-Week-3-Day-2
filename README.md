@@ -5,10 +5,5 @@
 
 Completed By:
 
-<<<<<<< HEAD
 - Bao Tran
 - Steven Inouye
-=======
-- Student 1
-- Student 2
->>>>>>> parent of 9b7f1cb... Add partners to README.md
