@@ -7,4 +7,3 @@ Completed By:
 
 - Bao Tran
 - Steven Inouye
-fjs
