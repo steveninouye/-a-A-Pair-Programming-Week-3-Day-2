@@ -69,8 +69,9 @@ VALUES
   ('Bao', 'Tran'),
   ('Steven', 'Inouye'),
   ('Sai', 'Patt'),
-  ('Filipp', 'Kramer');
-
+  ('Filipp', 'Kramer'),
+  ('Ryan', 'Mapa');
+  
 INSERT INTO
   questions (title, body, author_id)
 VALUES
@@ -82,13 +83,13 @@ INSERT INTO
 VALUES
   ('Banana', (SELECT id FROM questions WHERE title = 'What are the answers to the test?'), (SELECT id FROM users WHERE fname = 'Bao' AND lname = 'Tran')),
   ('Apple', (SELECT id FROM questions WHERE title = 'Who is this?'), (SELECT id FROM users WHERE fname = 'Sai' AND lname = 'Patt'));
-  
+
 INSERT INTO 
   question_follows(user_id, question_id)
 VALUES 
   ((SELECT id FROM users WHERE fname = 'Bao' AND lname = 'Tran'), (SELECT id FROM questions WHERE title = 'Who is this?')),
   (3, 1);
-  
+
 INSERT INTO 
   question_likes(user_id, question_id)
 VALUES 

@@ -49,6 +49,11 @@ class User
     Reply.find_by_user_id(@id)
   end 
   
+  def follow_questions 
+    QuestionFollow.followed_questions_for_user_id(@id)
+  end 
+  
+  
   def create
     
   end
