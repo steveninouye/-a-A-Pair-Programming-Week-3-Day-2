@@ -5,5 +5,5 @@
 
 Completed By:
 
-- Student 1
-- Student 2
+- Bao Tran
+- Steven Inouye
