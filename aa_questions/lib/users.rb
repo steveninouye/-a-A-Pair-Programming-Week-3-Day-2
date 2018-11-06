@@ -18,7 +18,8 @@ class User
       WHERE 
         lname = :lname AND fname = :fname
     SQL
-    data.map { |datum| User.new(datum) }
+    
+    User.new(data)
   end 
   
   def self.find_by_id(id)
@@ -30,7 +31,8 @@ class User
       WHERE 
         id = ?
     SQL
-    data.map { |datum| User.new(datum) }
+    
+    User.new(data)
   end 
 
   def initialize(options)

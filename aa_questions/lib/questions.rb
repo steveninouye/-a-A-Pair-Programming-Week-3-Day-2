@@ -18,10 +18,21 @@ class Question
         author_id = :author_id
     SQL
     
-    data.map { |datum| Question.new(datum) }
+    Question.new(data)
   end 
   
-  
+  def self.find_by_id(id)
+    data = QuestionsDatabase.instance.execute(<<-SQL, :id => id)
+      SELECT 
+        *
+      FROM 
+        questions 
+      WHERE 
+        id = :id
+    SQL
+    
+    Question.new(data)
+  end 
 
   def initialize(options)
     @id = options['id']

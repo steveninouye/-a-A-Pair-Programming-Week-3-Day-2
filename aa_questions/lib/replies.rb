@@ -18,7 +18,7 @@ class Reply
         user_id = :user_id
     SQL
     
-    data.map { |datum| Reply.new(datum) }
+    Reply.new(data)
   end 
   
   def self.find_by_id(id)
@@ -31,7 +31,7 @@ class Reply
         id = ?
     SQL
     
-    data.map { |datum| Reply.new(datum) }
+    Reply.new(data)
   end
     
   def self.find_by_question_id(question_id)
@@ -44,7 +44,7 @@ class Reply
         question_id = :question_id
     SQL
     
-    data.map { |datum| Reply.new(datum) }
+    Reply.new(data)
   end 
   
   def initialize(options)
