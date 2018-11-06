@@ -1,5 +1,9 @@
 PRAGMA foreign_keys = ON;
 
+DROP TABLE if exists question_likes;
+DROP TABLE if exists question_follows;
+DROP TABLE if exists replies;
+DROP TABLE if exists questions;
 DROP TABLE if exists users;
 
 CREATE TABLE users (
@@ -56,4 +60,39 @@ CREATE TABLE question_likes (
   PRIMARY KEY (user_id, question_id)
 );
 
+-----------------------
+-- INSERT INTO TABLES SECTION
 
+INSERT INTO 
+  users (fname, lname)
+VALUES
+  ('Bao', 'Tran'),
+  ('Steven', 'Inouye'),
+  ('Sai', 'Patt'),
+  ('Filipp', 'Kramer');
+
+INSERT INTO
+  questions (title, body, author_id)
+VALUES
+  ('Who is this?', 'Who is my T.A.?', (SELECT id FROM users WHERE fname = 'Bao' AND lname = 'Tran')),
+  ('What are the answers to the test?', 'I''ll pay $100 for the answers tonight.  Thank you!', (SELECT id FROM users WHERE fname = 'Steven' AND lname = 'Inouye'));
+
+INSERT INTO
+  replies (body, question_id, user_id)
+VALUES
+  ('Banana', (SELECT id FROM questions WHERE title = 'What are the answers to the test?'), (SELECT id FROM users WHERE fname = 'Bao' AND lname = 'Tran')),
+  ('Apple', (SELECT id FROM questions WHERE title = 'Who is this?'), (SELECT id FROM users WHERE fname = 'Sai' AND lname = 'Patt'));
+  
+INSERT INTO 
+  question_follows(user_id, question_id)
+VALUES 
+  ((SELECT id FROM users WHERE fname = 'Bao' AND lname = 'Tran'), (SELECT id FROM questions WHERE title = 'Who is this?')),
+  (3, 1);
+  
+INSERT INTO 
+  question_likes(user_id, question_id)
+VALUES 
+  (3, 1);
+
+  
+  
