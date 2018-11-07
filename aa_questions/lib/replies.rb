@@ -55,6 +55,10 @@ class Reply
     @user_id = options['user_id']
   end
   
+  def table 
+    'replies'
+  end 
+  
   def author
     User.find_by_user_id(@user_id)
   end
@@ -71,9 +75,30 @@ class Reply
     Reply.all.select{ |child_reply| child_reply.parent_id = id }
   end
   
-  def create
-  end
+  def save
+    if id 
+      update
+    else 
+      QuestionsDatabase.instance.execute(<<-SQL, self.body, self.question_id, self.parent_id, self.user_id)
+        INSERT INTO
+          replies (body, question_id, parent_id, user_id)
+        VALUES
+          (?, ?, ?, ?)
+      SQL
+    
+      self.id = QuestionsDatabase.instance.last_insert_row_id
+    end
+  end 
 
   def update
+    QuestionsDatabase.instance.execute(<<-SQL, self.body, self.question_id, self.parent_id, self.user_id, self.id)
+      UPDATE 
+        replies 
+      SET
+        body = ?, question_id = ?, parent_id = ?, user_id = ?
+      WHERE 
+        id = ?
+    SQL
   end
+  
 end

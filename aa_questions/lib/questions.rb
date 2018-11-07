@@ -49,6 +49,10 @@ class Question
     @author_id = options['author_id']
   end
   
+  def table 
+    'questions'
+  end 
+  
   def author
     User.find_by_id(@author_id)
   end
@@ -68,4 +72,15 @@ class Question
   def num_likes
     QuestionLike.num_likes_for_question_id(@id)
   end
+  
+  def save
+    QuestionsDatabase.instance.execute(<<-SQL, self.title, self.body, self.author_id)
+      INSERT INTO
+        questions (title, body, author_id)
+      VALUES
+        (?, ?, ?)
+    SQL
+    
+    self.id = QuestionsDatabase.instance.last_insert_row_id
+  end 
 end

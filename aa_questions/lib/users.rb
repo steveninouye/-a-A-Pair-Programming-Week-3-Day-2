@@ -1,8 +1,9 @@
 require_relative "questions_database"
 require_relative "questions"
 
-class User
+class User < QuestionDB
   attr_accessor :id, :fname, :lname
+  TABLE = 'users'
 
   def self.all
     data = QuestionsDatabase.instance.execute("SELECT * FROM users")
@@ -35,7 +36,6 @@ class User
     User.new(data)
   end 
   
-
   def initialize(options)
     @id = options['id']
     @fname = options['fname']
@@ -71,8 +71,18 @@ class User
     SQL
   end 
   
-  
   def liked_questions
     QuestionLike.liked_questions_for_user_id(@id)
   end
+  
+  def save
+    QuestionsDatabase.instance.execute(<<-SQL, self.fname, self.lname)
+      INSERT INTO
+        users (fname, lname)
+      VALUES
+        (?, ?)
+    SQL
+    
+    self.id = QuestionsDatabase.instance.last_insert_row_id
+  end 
 end
