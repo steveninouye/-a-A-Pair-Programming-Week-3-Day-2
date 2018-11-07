@@ -18,31 +18,36 @@ class QuestionsDatabase < SQLite3::Database
   end
 end
 
-# class QuestionDB
-# 
-#   def initialize
-#   end 
-# 
-#   def self.find_by_id(id)
-#     data = QuestionsDatabase.instance.execute(<<-SQL, TABLE, id)
-#       SELECT 
-#         *
-#       FROM 
-#         ?
-#       WHERE 
-#         id = ?
-#     SQL
-# 
-#     self.class.new(data)
-#   end 
-# 
-#   def self.make_string 
-#     "SELECT * FROM #{TABLE}"
-#   end 
-# 
-#   def self.all 
-#     data = QuestionsDatabase.instance.execute(self.make_string)
-# 
-#     data.map { |datum| self.class.new(datum) }
-#   end
-# end 
+class QuestionDB
+
+  # def initialize
+  # end 
+
+  # def self.find_by_id(id)
+  #   data = QuestionsDatabase.instance.execute(<<-SQL, TABLE, id)
+  #     SELECT 
+  #       *
+  #     FROM 
+  #       ?
+  #     WHERE 
+  #       id = ?
+  #   SQL
+  # 
+  #   self.class.new(data)
+  # end 
+
+  # def self.make_string 
+  #   "SELECT * FROM #{self.table}"
+  # end 
+
+  # def self.all 
+  #   data = QuestionsDatabase.instance.execute(<<-SQL)
+  #     SELECT
+  #       *
+  #     FROM
+  #       #{TABLE}
+  #   SQL
+  # 
+  #   data.map { |datum| self.class.new(datum) }
+  # end
+end 
