@@ -1,49 +1,49 @@
 /* Introduction to Cascading Style Sheets */
 
 body {
-  /* If the user cannot load the Arial font, the sans-serif font is used */
-  font-family: Arial, sans-serif;
-  background-color: #FEFFF1;
+    /* If the user cannot load the Arial font, the sans-serif font is used */
+    font-family: Arial, sans-serif;
+    background-color: #fefff1;
 }
 
 h1 {
-  font-size: 38px;
+    font-size: 38px;
 }
 
 h2 {
-  font-size: 32px;
+    font-size: 32px;
 }
 
 /* This selector selects ALL anchor tag children of ALL list elements that
 are children of an Unordered Lsit element */
-ul li a, figcaption a {
-  text-decoration: none;
-  color: inherit;
+ul li a,
+figcaption a {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* This selector selects only IMMEDIATE (1 level deep) image element children
 of the header element */
 header > img {
-  width: 100px;
+    width: 100px;
 }
 
 /* Selects all elements with the class attribute "ingredients-list" */
 .ingredients-list {
-
-  /* The list style property is shorthand for multiple list-style properties*/
-  list-style: square inside;
+    /* The list style property is shorthand for multiple list-style properties*/
+    list-style: square inside;
 }
 
 ol {
-  list-style: upper-roman inside;
+    list-style: upper-roman inside;
 }
 
 .user_review h4 {
-  font-size: 18px;
-  font-weight: bold;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-input[type="radio"] {
+input[type='radio'] {
     -webkit-appearance: none;
     width: 27px;
     height: 27px;
@@ -51,10 +51,9 @@ input[type="radio"] {
     vertical-align: bottom;
 }
 
-input[type="radio"]:checked {
-  background-position: 30px 30px;
+input[type='radio']:checked {
+    background-position: 30px 30px;
 }
-
 
 input:last-child {
     background: gold;
@@ -65,10 +64,36 @@ input:last-child:hover {
 }
 
 ol li:nth-of-type(2n) {
-  background-color: whitesmoke;
+    background-color: whitesmoke;
 }
 
 h2 + .user_review {
     border-top: 1px solid black;
 }
 
+li {
+    display: inline-block;
+}
+
+li a {
+    padding: 20px;
+    display: inline-block;
+}
+
+nav,
+nav ul {
+    display: inline;
+}
+
+body {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.main-section {
+    width: 700px;
+}
+
+aside {
+    width: 180px;
+}
