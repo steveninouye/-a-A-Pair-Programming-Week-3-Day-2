@@ -14,7 +14,8 @@ class QuestionFollow
         users.*
       FROM 
         question_follows
-        JOIN users ON users.id = question_follows.user_id 
+      JOIN
+        users ON users.id = question_follows.user_id 
       WHERE 
         question_id = ?
     SQL
@@ -28,13 +29,36 @@ class QuestionFollow
         questions.*
       FROM 
         question_follows
-        JOIN questions ON questions.id = question_follows.question_id 
+      JOIN
+        questions ON questions.id = question_follows.question_id 
       WHERE 
         user_id = ?
     SQL
     
     data.map { |datum| Question.new(datum) }
   end 
+  
+  def self.most_followed_questions(n)
+    data = QuestionsDatabase.instance.execute(<<-SQL, n)
+      SELECT 
+        questions.*
+      FROM
+        (SELECT
+          question_id AS id
+        FROM
+          question_follows
+        GROUP BY
+          id
+        ORDER BY
+          COUNT(*) DESC
+        LIMIT
+          ?) AS best_questions
+      JOIN
+        questions
+        ON questions.id = best_questions.id
+    SQL
+    data.map { |datum| Question.new(datum) }
+  end
 
   def initialize(options)
     @user_id = options['user_id']

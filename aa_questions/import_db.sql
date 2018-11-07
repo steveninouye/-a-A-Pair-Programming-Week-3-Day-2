@@ -76,7 +76,9 @@ INSERT INTO
   questions (title, body, author_id)
 VALUES
   ('Who is this?', 'Who is my T.A.?', (SELECT id FROM users WHERE fname = 'Bao' AND lname = 'Tran')),
-  ('What are the answers to the test?', 'I''ll pay $100 for the answers tonight.  Thank you!', (SELECT id FROM users WHERE fname = 'Steven' AND lname = 'Inouye'));
+  ('This is another question', 'aaaaa', 1),
+  ('What are the answers to the test?', 'I''ll pay $100 for the answers tonight.  Thank you!', (SELECT id FROM users WHERE fname = 'Steven' AND lname = 'Inouye')),
+  ('What is your question?', 'What is his question?', 5);
 
 INSERT INTO
   replies (body, question_id, user_id)
@@ -93,7 +95,11 @@ VALUES
 INSERT INTO 
   question_likes(user_id, question_id)
 VALUES 
-  (3, 1);
+  (3, 1),
+  (1, 1),
+  (2, 1),
+  (3, 3),
+  (5, 3);
 
   
   

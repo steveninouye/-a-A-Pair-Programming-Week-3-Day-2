@@ -34,6 +34,7 @@ class User
     
     User.new(data)
   end 
+  
 
   def initialize(options)
     @id = options['id']
@@ -53,11 +54,25 @@ class User
     QuestionFollow.followed_questions_for_user_id(@id)
   end 
   
+  def average_karma
+    data = QuestionsDatabase.instance.execute(<<-SQL, :author_id => author_id)
+    SELECT 
+      CAST(COUNT(question_likes.user_id) AS FLOAT) / COUNT (DISTINCT questions_asked_by_user.id)
+    FROM
+      (SELECT 
+        *
+      FROM 
+        questions 
+      WHERE 
+        author_id = 1
+      ) AS questions_asked_by_user
+      LEFT JOIN 
+        question_likes ON question_likes.question_id = questions_asked_by_user.id
+    SQL
+  end 
   
-  def create
-    
-  end
-
-  def update
+  
+  def liked_questions
+    QuestionLike.liked_questions_for_user_id(@id)
   end
 end
